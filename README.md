@@ -87,3 +87,5 @@ The main 5V system regulator can supply up to 3 amps. However, this main system 
 as the 4V (GSM modem), 3.3V and 1.8V regulators downstream. 
 
 If too much power is utilized, it may cause system instability, or worse case, activation of the polyfuse (F1).
+
+[https://github.com/cellular-tracking-technologies/SensorStationAccessory_Template/blob/master/SensorStation_Accessory_PCB.png?raw=true]
