@@ -33,6 +33,7 @@ I2C, power and ground. It does not have to be used.
 ### GPIO Assignments
 
 | I2C Port | GPIO (BCM) |
+|----------|------------|
 | J14      | GPIO41    |
 | J15      | GPIO42    |
 | J18      | GPIO43    |
