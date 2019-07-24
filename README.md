@@ -38,6 +38,46 @@ I2C, power and ground. It does not have to be used.
 | J15      | GPIO42    |
 | J18      | GPIO43    |
 
+## Suggested Design and Operation
+
+Each accessory should make use of a keyed connector. Alternatively, it can be a standard female header. Note that orientation should be placed on the silkscreen if the non-keyed female header is used. If the GPIO/CS pin is used on a design that may possibly be plugged in backwards, the design should accept 5V on its GPIO/CS pin (the inverse). All other pins will be within specification, but will likely cause lockup of the I2C bus.
+
+One challenge is also identifying which port an accessory is plugged into, in order to identify which GPIO/CS pin to use for the accessory. At this point in time, it must be configured manually by the user, or require connection to a specific slot, until a discovery circuit and technique can be implemented.
+
+## BANK 1 GPIO Reference 
+
+Some of the utilized GPIO pins have additional functions that can be assigned. The only extra function of interest will be PWM1, GPCLK1, and GPCLK2.
+
+| I2C Port | GPIO Port | Available Functions |
+|----------|-----------|---------------------|
+| J14      | GPIO41    | GPIO / PWM1 / SPI2 MOSI / UART1 RX |
+| J15      | GPIO42    | GPIO / GPCLK1 / SPI2 SCLK / UART1 RTS |
+| J18      | GPIO43    | GPIO / GPCLK2 / SPI2 CE0 / UART1 CTS |
+
+## Fun with PWM
+
+You can utilize J14's PWM functionality to generate a wide variety of duty cycles and frequencies. In conjunction with a piezo speaker, you can use this to generate sound, for example.
+
+## Fun with GPCLK
+
+The GPCLK line stands for General Purpose Clock. You can use these two lines to generate a variety of clock signals. This may be useful when experimenting with software defined radio.
+
+The following clock sources are available:
+
+| Source | Frequency | Description |
+|--------|-----------|-------------|
+| 0 | 0 Hz | ground |
+| 1 | 19.2MHz | oscillator |
+| 2 | 0Hz | testdebug0 |
+| 3 | 0Hz | testdebug1 |
+| 4 | 0Hz | PLLA |
+| 5 | 1000MHz | PLLC |
+| 6 | 500MHz | PLLD |
+| 7 | 216MHz | HDMI auxiliary |
+| 8-15 | 0Hz | Ground |
+
+You can use a clock divider to generate other frequencies. You can do this by SOURCE_FREQUENCY / (DIV_I + DIV_F / 4096). 
+
 ## Power Considerations
 
 The 3V and 5V pins are directly connected to their associated regulators. Care should be taken to not draw an unreasonable amount of current
